@@ -2,7 +2,7 @@
 
 
 struct MrkvNode;
-/*
+
 struct{
 	uint8_t weight; //Probality weight, 0-255
 	struct MrkvNode* Next;//The MrkvNode it points to
@@ -13,6 +13,4 @@ struct{
 	MrkvLink** Links;//The Links to other nodes
 } typedef MrkvNode;
 
-*/
 
- 
