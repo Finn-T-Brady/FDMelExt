@@ -1,23 +1,41 @@
+import random
+from time import time_ns as timeStamp
 class MrkvChain:
-    NodesContent = []
-    NodesLookUp =[]
-    NodeWeights = [[]]
-    
-    
-    def SetNodeWeight(self,n,m,i):
-        self.NodeWeight[n][m]=i
-        pass
-    def SetNodeWeights(self,n,i):
-        self.NodeWeight[n]=i
-        pass
+    #Nodes are formated as {nodeValue:[links, numbers are repeated to add weight]} e.g.{4:[1,3,3,5,2]}
+    Nodes = {}
+    currVal = None
+
+    rng = random.Random(None)
+
+    dWeights = [[1,3],[2,2],[3,1],[-1,1]]#weights for value [N infront, weight]
+
+    def Next(self):
+        val=self.currVal
+        links=self.Nodes[val]
+        self.currVal=links[self.rng.randint(0,len(links)-1)]
+        return val
+        
     
     def ArrayDecomp(self,Arr):
-        pass
+        t=len(Arr)
+        for x in Arr:
+            self.Nodes[x]=[]
+        for x in range(0,t):
+            for n in self.dWeights:
+                self.Nodes[Arr[x]]+=n[1]*[Arr[(x+n[0])%t]]
+                
+
     
-    
-    def _init_(self):
-        pass
-    
-    def _init_(self,Arr):
-        self.ArrayDecomp(Arr)
-        pass
+    def __init__(self,Arr=None,Seed=None):
+        if Seed==None:
+            tempSeed=timeStamp()%0xFFFFFFFF
+            print("MrkvChain seed:"+hex(tempSeed))
+            self.rng.seed(tempSeed)
+        if Seed!=None:
+            self.rng.seed(Seed)
+        if Arr!=None:
+            self.ArrayDecomp(Arr)
+            self.currVal=Arr[0]
+            self.Next()
+
+        
