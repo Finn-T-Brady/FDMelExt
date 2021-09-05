@@ -7,14 +7,13 @@ class MrkvChain:
 
     rng = random.Random(None)
 
-    dWeights = [[1,3],[2,2],[3,1],[-1,1]]#weights for value [N infront, weight]
+    dWeights = [[1,3],[2,2],[3,1],[-1,1]]#weights for value n infront, formatted [n, weight]
 
     def Next(self):
         val=self.currVal
         links=self.Nodes[val]
         self.currVal=links[self.rng.randint(0,len(links)-1)]
         return val
-        
     
     def ArrayDecomp(self,Arr):
         t=len(Arr)
@@ -23,8 +22,6 @@ class MrkvChain:
         for x in range(0,t):
             for n in self.dWeights:
                 self.Nodes[Arr[x]]+=n[1]*[Arr[(x+n[0])%t]]
-                
-
     
     def __init__(self,Arr=None,Seed=None):
         if Seed==None:
@@ -37,5 +34,3 @@ class MrkvChain:
             self.ArrayDecomp(Arr)
             self.currVal=Arr[0]
             self.Next()
-
-        
