@@ -7,7 +7,7 @@ class MrkvChain:
 
     rng = random.Random(None)
 
-    dWeights = [[1,3],[2,2],[3,1],[-1,1]]#weights for value n infront, formatted [n, weight]
+    dWeights = [[1,4],[2,2],[3,1],[-1,1]]#weights for value n infront, formatted [n, weight]
 
     def Next(self):
         val=self.currVal
@@ -23,13 +23,15 @@ class MrkvChain:
             for n in self.dWeights:
                 self.Nodes[Arr[x]]+=n[1]*[Arr[(x+n[0])%t]]
     
-    def __init__(self,Arr=None,Seed=None):
+    def __init__(self,Arr=None,Seed=None,Weights=None):
         if Seed==None:
             tempSeed=timeStamp()%0xFFFFFFFF
             print("MrkvChain seed:"+hex(tempSeed))
             self.rng.seed(tempSeed)
         if Seed!=None:
             self.rng.seed(Seed)
+        if Weights!=None:
+            self.dWeights=Weights
         if Arr!=None:
             self.ArrayDecomp(Arr)
             self.currVal=Arr[0]
