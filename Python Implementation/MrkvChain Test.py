@@ -1,5 +1,6 @@
-from MrkvChain import Markov
+from Functions import Markov
 
+#mock Pattern class
 class TestStr:
     data = []
 
@@ -14,7 +15,9 @@ class TestStr:
 
 TestStr.Markov=Markov
 
-p=TestStr([0,3,6,9,8,7,6,5,4,3,2,1,0])
+#p=TestStr([0,3,6,9,8,7,6,5,4,3,2,1])
+#p=TestStr([])
+p=TestStr([0,3,6,9,8,7,4,1])
 
 print(p)
 
