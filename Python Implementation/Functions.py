@@ -19,12 +19,21 @@ def Markov(self,i=None,append=1,Seed=None, Weights=None):
     del Mrkv
     return self.new(new)
 
-#def Cocktail(self,)
+def Cocktail(self,append=1,i=None,pass=0, d=None):
+    if self.data==[]:
+        print("Warning: .Cocktail recieved an empty pattern")
+        return self.new([])
+    if(i==None):
+        i=len(self.data)
+    new=[]
+    pass
 
-def RecursiveIndex(self,i=None,stall=0,start=None):
+def RecursiveIndex(self,append=1, i=None,stall=0,start=None):
     if self.data==[]:
         print("Warning: .RecursiveIndex recieved an empty pattern")
         return self.new([])
+    if i==None:
+        i=len(self.data)
     new = []
     if stall==0:
         new = RecurStall_0(self.data,i,start)
@@ -32,12 +41,12 @@ def RecursiveIndex(self,i=None,stall=0,start=None):
         new = RecurStall_1(self.data,i,start)
     if stall==2:
         new = RecurStall_2(self.data,i,start)
+    if(append==1):
+        new=self.data+new
     return self.new(new)
 
 def RecurStall_0(pattern,i=None,start=0):
     new = []
-    if i==None:
-        i=len(pattern)
     curr=pattern[start]
     new+=[curr]
     for x in range(0,i-1):
@@ -46,8 +55,6 @@ def RecurStall_0(pattern,i=None,start=0):
     return new
 def RecurStall_1(pattern,i=None,start=None):
     new = []
-    if i==None:
-        i=len(pattern)
     curr=pattern[start]
     old=-1
     new+=[curr]
@@ -61,8 +68,6 @@ def RecurStall_1(pattern,i=None,start=None):
     return new
 def RecurStall_2(pattern,i=None,start=None):
     new = []
-    if i==None:
-        i=len(pattern)
     curr=pattern[start]
     old=-1
     new+=[curr]
