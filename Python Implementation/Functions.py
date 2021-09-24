@@ -130,12 +130,7 @@ def RecursiveIndex(self,append=1, i=None,stall=0,start=0):
     if i==None:
         i=len(self.data)
     new = []
-    if stall==0:
-        new = RecurStall_0(self.data,i,start)
-    if stall==1:
-        new = RecurStall_1(self.data,i,start)
-    if stall==2:
-        new = RecurStall_2(self.data,i,start)
+    new = [RecurStall_0,RecurStall_1,RecurStall_2][stall](self.data,i,start)
     if(append==1):
         new=self.data+new
     return self.new(new)
