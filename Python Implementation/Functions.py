@@ -1,9 +1,9 @@
 from MrkvChain_Class import MrkvChain
 
 #functions to be inserted into FoxDot as a Pattern Method
-#via >>>Pattern.Markov=Markov
-#https://github.com/Qirky/FoxDot/blob/76a4e3ad31a987c6e2c43c38d0440898d3408780/FoxDot/lib/Patterns/Main.py#L1043
+#via the @PatternMethod function decorator
 
+@PatternMethod
 def Markov(self,i=None,append=1,Seed=None, Weights=None):
     if(self.data==[]):
         print("Warning: .Markov recieved an empty pattern")
@@ -19,16 +19,111 @@ def Markov(self,i=None,append=1,Seed=None, Weights=None):
     del Mrkv
     return self.new(new)
 
-def Cocktail(self,append=1,i=None,pass=0, d=None):
+@PatternMethod
+def Cocktail(self,append=1,i=None,step=0, d=0,dbg=False):
     if self.data==[]:
         print("Warning: .Cocktail recieved an empty pattern")
         return self.new([])
     if(i==None):
         i=len(self.data)
+        i=i*i
     new=[]
-    pass
+    if(append==1):
+        new=self.data
+    new+=[CTailFwdStp,CTailFwdPass,CTailBkwdStp,CTailBkwdPass][2*d+step](self.data,i)
+    if(dbg):
+        print(new)
+    return self.new(new)
 
-def RecursiveIndex(self,append=1, i=None,stall=0,start=None):
+def CTailFwdStp(data,i):
+    new=[]
+    swapped = True
+    start=0
+    end = len(data)-1
+    while (swapped and i>=0):
+        for i in range(start, end):
+            if(data[i]>data[i+1]):
+                data[i], data[i+1] = data[i+1],data[i]
+                swapped = True
+            new+=data
+        if(swapped == False):
+            break
+        end = end - 1
+        for i in range(end-1,start-1,-1):
+            if(data[i] > data[i+1]):
+                data[i], data[i+1] = data[i+1], data[i]
+                swapped = True
+            new+=data
+        start = start +1
+        i-=1
+    return new
+def CTailFwdPass(data,i):
+    new=[]
+    swapped = True
+    start=0
+    end = len(data)-1
+    while (swapped and i>=0):
+        for i in range(start, end):
+            if(data[i]>data[i+1]):
+                data[i], data[i+1] = data[i+1],data[i]
+                swapped = True
+        if(swapped == False):
+            break
+        end = end - 1
+        for i in range(end-1,start-1,-1):
+            if(data[i] > data[i+1]):
+                data[i], data[i+1] = data[i+1], data[i]
+                swapped = True
+        start = start +1
+        new+=data
+        i-=1
+    return new
+def CTailBkwdStp(data,i):
+    new=[]
+    swapped = True
+    start=0
+    end = len(data)-1
+    while (swapped and i>=0):
+        for i in range(end-1,start-1,-1):
+            if(data[i] > data[i+1]):
+                data[i], data[i+1] = data[i+1], data[i]
+                swapped = True
+            new+=data
+        if(swapped == False):
+            break
+        start = start +1
+        for i in range(start, end):
+            if(data[i]>data[i+1]):
+                data[i], data[i+1] = data[i+1],data[i]
+                swapped = True
+            new+=data
+        end = end - 1
+        i-=1
+    return new
+def CTailBkwdPass(data,i):
+    new=[]
+    swapped = True
+    start=0
+    end = len(data)-1
+    while (swapped and i>=0):
+        for i in range(end-1,start-1,-1):
+            if(data[i] > data[i+1]):
+                data[i], data[i+1] = data[i+1], data[i]
+                swapped = True
+        if(swapped == False):
+            break
+        start = start +1
+        for i in range(start, end):
+            if(data[i]>data[i+1]):
+                data[i], data[i+1] = data[i+1],data[i]
+                swapped = True
+        end = end - 1
+        new+=data
+        i-=1
+    return new
+
+@PatternMethod
+def RecursiveIndex(self,append=1, i=None,stall=0,start=0):
     if self.data==[]:
         print("Warning: .RecursiveIndex recieved an empty pattern")
         return self.new([])
@@ -53,7 +148,7 @@ def RecurStall_0(pattern,i=None,start=0):
         curr=pattern[curr%len(pattern)]
         new+=[curr]
     return new
-def RecurStall_1(pattern,i=None,start=None):
+def RecurStall_1(pattern,i=None,start=0):
     new = []
     curr=pattern[start]
     old=-1
@@ -66,7 +161,7 @@ def RecurStall_1(pattern,i=None,start=None):
         curr=pattern[curr%len(pattern)]
         new+=[curr]
     return new
-def RecurStall_2(pattern,i=None,start=None):
+def RecurStall_2(pattern,i=None,start=0):
     new = []
     curr=pattern[start]
     old=-1
