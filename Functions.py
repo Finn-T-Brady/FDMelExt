@@ -30,6 +30,7 @@ def Cocktail(self,append=1,i=None,step=0, d=0,dbg=False):
     new=[]
     if(append==1):
         new=self.data
+    #selecting from an array of functions instead of using if statements
     new+=[CTailFwdStp,CTailFwdPass,CTailBkwdStp,CTailBkwdPass][2*d+step](self.data,i)
     if(dbg):
         print(new)
