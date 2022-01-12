@@ -1,4 +1,4 @@
-from MrkvChain_Class import MrkvChain
+from MrkvChainClass import MrkvChain
 
 #functions to be inserted into FoxDot as a Pattern Method
 #via the @PatternMethod function decorator

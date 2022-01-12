@@ -1,5 +1,18 @@
-from Functions import Markov
-
+from MrkvChainClass import MrkvChain
+def Markov(self,i=None,append=1,Seed=None, Weights=None):
+    if(self.data==[]):
+        print("Warning: .Markov recieved an empty pattern")
+        return self.new([])
+    Mrkv=MrkvChain(self.data,Seed,Weights)
+    new=[]
+    if append==1:
+        new=self.data
+    if i==None:
+        i=len(self.data)
+    for x in range(0,i):
+        new+=[Mrkv.Next()]
+    del Mrkv
+    return self.new(new)
 #mock Pattern class
 class TestStr:
     data = []

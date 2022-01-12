@@ -54,5 +54,4 @@ class MrkvChain:
         #if an array is provided it will decompose it to the probabilities
         if Arr!=None:
             self.ArrayDecomp(Arr)
-            #
-            self.CurrVal=Arr[0]
+            self.currVal=Arr[0]
