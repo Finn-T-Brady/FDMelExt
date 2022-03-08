@@ -41,7 +41,6 @@ def CTailFwdStp(data,i):
     new=[]
     swapped = True
     start=0
-    end = len(data)-1
     while (swapped and i>=0):
         for i in range(start, end):
             if(data[i]>data[i+1]):
@@ -63,7 +62,6 @@ def CTailFwdPass(data,i):
     new=[]
     swapped = True
     start=0
-    end = len(data)-1
     while (swapped and i>=0):
         for i in range(start, end):
             if(data[i]>data[i+1]):
@@ -84,7 +82,6 @@ def CTailBkwdStp(data,i):
     new=[]
     swapped = True
     start=0
-    end = len(data)-1
     while (swapped and i>=0):
         for i in range(end-1,start-1,-1):
             if(data[i] > data[i+1]):
@@ -106,7 +103,6 @@ def CTailBkwdPass(data,i):
     new=[]
     swapped = True
     start=0
-    end = len(data)-1
     while (swapped and i>=0):
         for i in range(end-1,start-1,-1):
             if(data[i] > data[i+1]):
