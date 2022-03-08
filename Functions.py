@@ -165,4 +165,5 @@ def RecurStall_2(pattern,i=None,start=0):
         if(curr==old):
             curr=pattern[(curr+1)%len(pattern)]
         new+=[curr]
+        old=curr
     return new
