@@ -21,7 +21,7 @@ def Markov(self,i=None,append=1,Seed=None, Weights=None):
     return self.new(new)
 
 @PatternMethod
-def Cocktail(self,append=1,i=None,step=0, d=0,dbg=False):
+def Cocktail(self,append=1,i=None,step=0, d=0,debug=False):
     if self.data==[]:
         print("Warning: .Cocktail recieved an empty pattern")
         return self.new([])
@@ -33,7 +33,7 @@ def Cocktail(self,append=1,i=None,step=0, d=0,dbg=False):
         new=self.data
     #selecting from an array of functions instead of using if statements
     new+=[CTailFwdStp,CTailFwdPass,CTailBkwdStp,CTailBkwdPass][2*d+step](self.data,i)
-    if(dbg):
+    if(debug):
         print(new)
     return self.new(new)
 
@@ -121,7 +121,7 @@ def CTailBkwdPass(data,i):
     return new
 
 @PatternMethod
-def RecursiveIndex(self,append=1, i=None,stall=0,start=0):
+def RecursiveIndex(self,append=1, i=None,stall=2,start=0):
     if self.data==[]:
         print("Warning: .RecursiveIndex recieved an empty pattern")
         return self.new([])
