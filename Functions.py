@@ -1,3 +1,4 @@
+from FoxDot import *
 from MrkvChainClass import MrkvChain
 
 #functions to be inserted into FoxDot as a Pattern Method
