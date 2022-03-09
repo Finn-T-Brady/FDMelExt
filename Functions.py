@@ -5,29 +5,31 @@ from MrkvChainClass import MrkvChain
 #via the @PatternMethod function decorator
 
 @PatternMethod
-def Markov(self,i=None,append=1,Seed=None, Weights=None):
+def Markov(self,Length=None,append=1,Seed=None, Weights=None,debug=0):
     if(self.data==[]):
         print("Warning: .Markov recieved an empty pattern")
         return self.new([])
     Mrkv=MrkvChain(self.data,Seed,Weights)
     new=[]
-    if append==1:
-        new=self.data
-    if i==None:
-        i=len(self.data)
-    for x in range(0,i):
+    if Length==None:
+        Length=len(self.data)
+    for x in range(0,Length):
         new+=[Mrkv.Next()]
     del Mrkv
+    if debug==1:
+        print(new)
+    if append==1:
+        new=self.data+new
     return self.new(new)
 
 @PatternMethod
-def Cocktail(self,append=1,i=None,step=0, d=0,debug=False):
+def Cocktail(self,append=1,Length=None,step=0, d=0,debug=False):
     if self.data==[]:
         print("Warning: .Cocktail recieved an empty pattern")
         return self.new([])
-    if(i==None):
-        i=len(self.data)
-        i=i*i
+    if(Length==None):
+        Length=len(self.data)
+        Length=Length*Length
     new=[]
     if(append==1):
         new=self.data
@@ -121,14 +123,16 @@ def CTailBkwdPass(data,i):
     return new
 
 @PatternMethod
-def RecursiveIndex(self,append=1, i=None,stall=2,start=0):
+def RecursiveIndex(self,append=1, Length=None,stall=2,start=0, debug=0):
     if self.data==[]:
         print("Warning: .RecursiveIndex recieved an empty pattern")
         return self.new([])
-    if i==None:
-        i=len(self.data)
+    if Length==None:
+        Length=len(self.data)
     new = []
     new = [RecurStall_0,RecurStall_1,RecurStall_2][stall](self.data,i,start)
+    if debug==1:
+        print(new)
     if(append==1):
         new=self.data+new
     return self.new(new)
