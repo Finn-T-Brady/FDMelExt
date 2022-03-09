@@ -23,7 +23,7 @@ def Markov(self,Length=None,append=1,Seed=None, Weights=None,debug=0):
     return self.new(new)
 
 @PatternMethod
-def Cocktail(self,append=1,Length=None,step=0, d=0,debug=False):
+def Cocktail(self,append=1,Length=None,step=0, Backwards=0,debug=False):
     if self.data==[]:
         print("Warning: .Cocktail recieved an empty pattern")
         return self.new([])
@@ -34,7 +34,7 @@ def Cocktail(self,append=1,Length=None,step=0, d=0,debug=False):
     if(append==1):
         new=self.data
     #selecting from an array of functions instead of using if statements
-    new+=[CTailFwdStp,CTailFwdPass,CTailBkwdStp,CTailBkwdPass][2*d+step](self.data,i)
+    new+=[CTailFwdStp,CTailFwdPass,CTailBkwdStp,CTailBkwdPass][2*Backwards+step](self.data,i)
     if(debug):
         print(new)
     return self.new(new)
