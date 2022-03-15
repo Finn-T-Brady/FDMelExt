@@ -34,7 +34,7 @@ def Cocktail(self,append=1,Length=None,step=0, Backwards=0,debug=False):
     if(append==1):
         new=self.data
     #selecting from an array of functions instead of using if statements
-    new+=[CTailFwdStp,CTailFwdPass,CTailBkwdStp,CTailBkwdPass][2*Backwards+step](self.data,i)
+    new+=[CTailFwdStp,CTailFwdPass,CTailBkwdStp,CTailBkwdPass][2*Backwards+step](self.data,Length)
     if(debug):
         print(new)
     return self.new(new)
@@ -130,7 +130,7 @@ def RecursiveIndex(self,append=1, Length=None,stall=2,start=0, debug=0):
     if Length==None:
         Length=len(self.data)
     new = []
-    new = [RecurStall_0,RecurStall_1,RecurStall_2][stall](self.data,i,start)
+    new = [RecurStall_0,RecurStall_1,RecurStall_2][stall](self.data,Length,start)
     if debug==1:
         print(new)
     if(append==1):
