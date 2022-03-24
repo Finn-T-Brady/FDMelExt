@@ -1,5 +1,6 @@
 from FoxDot import *
 from MrkvChainClass import MrkvChain
+from TrainedMarkov import TrainedMarkov
 
 #functions to be inserted into FoxDot as a Pattern Method
 #via the @PatternMethod function decorator
