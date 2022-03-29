@@ -8,6 +8,7 @@ parser.add_argument('--model',help='The model that will be trained',type=str)
 parser.add_argument('--mloc',help='the location of the named model',type=str,default=os.environ['APPDATA']+"\\MelExtModels")
 parser.add_argument('--rec',help='for if the pickled data being read is broken into chunks',type=bool,default=False)
 parser.add_argument('--weights',help='the weights for the odds of a number moving to a given relative position',default=[[1,4],[2,2],[3,1],[-1,1]])
+parser.add_argument('--floc',help="training data directory",type=str,default='TrainingData')
 args=parser.parse_args()
 
 #function to calculate the gcd of two numbers
@@ -29,7 +30,7 @@ def lGcd(List):
 
 
 readData = []
-with open('TrainingData\\'+args.file,'rb') as FileOpen:
+with open(args.floc+'\\'+args.file,'rb') as FileOpen:
     UData = pickle.load(FileOpen)
     if(not args.rec):
         readData = UData["degree"]
