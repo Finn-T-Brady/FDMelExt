@@ -54,9 +54,13 @@ else:
         modelData = pickle.load(FileOpen)
         FileOpen.close()
         newVals = list(set(readData)-set(modelData.keys()))
+        oldVals = list(modelData.keys())
         for x in newVals:
             modelData[x]={}
-        for x in list(modelData.keys()):
+        for x in newVals:
+            for y in list(modelData.keys()):
+                modelData[x][y]=0
+        for x in oldVals:
             for y in newVals:
                 modelData[x][y]=0
 
