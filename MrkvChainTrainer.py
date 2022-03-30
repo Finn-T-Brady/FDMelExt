@@ -7,8 +7,10 @@ parser.add_argument('--file',help='file to train model off',type=str)
 parser.add_argument('--model',help='The model that will be trained',type=str)
 parser.add_argument('--mloc',help='the location of the named model',type=str,default=os.environ['APPDATA']+"\\MelExtModels")
 parser.add_argument('--rec',help='for if the pickled data being read is broken into chunks',type=bool,default=False)
-parser.add_argument('--weights',help='the weights for the odds of a number moving to a given relative position',default=[[1,4],[2,2],[3,1],[-1,1]])
+parser.add_argument('--weights',help='the weights for the odds of a number moving to a given relative position',default=[[1,4],[2,2],[3,1],[-1,1]],nargs='+')
 parser.add_argument('--floc',help="training data directory",type=str,default='TrainingData')
+parser.add_argument('--MDE',help="Enables manual data entry",type=bool,default=False)
+parser.add_argument('--D',help="Manually entered data",nargs='+')
 args=parser.parse_args()
 
 #function to calculate the gcd of two numbers
