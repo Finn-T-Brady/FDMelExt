@@ -5,32 +5,42 @@ from TrainedMarkov import TrainedMarkov
 #functions to be inserted into FoxDot as a Pattern Method
 #via the @PatternMethod function decorator
 
+#This is the function to decompose a FoxDot Pattern into a Markov Chain and them recompose a pattern
 @PatternMethod
 def Markov(self,Length=None,append=1,Seed=None, Weights=None,debug=0):
+    #check for empty pattern
     if(self.data==[]):
         print("Warning: .Markov recieved an empty pattern")
         return self.new([])
+    #initialises markov chain with given pattern, seed, and weights
     Mrkv=MrkvChain(self.data,Seed,Weights)
     new=[]
+    #if no lenght is given, takes length of given data
     if Length==None:
         Length=len(self.data)
+    #gets new value from markov chain class for specified length
     for x in range(0,Length):
         new+=[Mrkv.Next()]
     del Mrkv
+    #debug argument at request of client
     if debug==1:
         print(new)
+    #if the append argument is set to 1 it appends the generate pattern to the end of the original one
     if append==1:
         new=self.data+new
     return self.new(new)
 
 @PatternMethod
 def Cocktail(self,append=1,Length=None,step=0, Backwards=0,debug=False):
+    #check for empty pattern
     if self.data==[]:
         print("Warning: .Cocktail recieved an empty pattern")
         return self.new([])
+    #if no length given it takes the square of 
     if(Length==None):
         Length=len(self.data)
-        Length=Length*Length
+        if(step==1):
+            Length=Length*Length
     new=[]
     if(append==1):
         new=self.data
@@ -40,6 +50,7 @@ def Cocktail(self,append=1,Length=None,step=0, Backwards=0,debug=False):
         print(new)
     return self.new(new)
 
+#The function for cocktail in step mode moving forwards first
 def CTailFwdStp(data,i):
     new=[]
     swapped = True
@@ -61,6 +72,7 @@ def CTailFwdStp(data,i):
         start = start +1
         i-=1
     return new
+#The function for cocktail in pass mode moving forwards first
 def CTailFwdPass(data,i):
     new=[]
     swapped = True
@@ -81,6 +93,7 @@ def CTailFwdPass(data,i):
         new+=data
         i-=1
     return new
+#The function for cocktail in step mode moving backwards first
 def CTailBkwdStp(data,i):
     new=[]
     swapped = True
@@ -102,6 +115,7 @@ def CTailBkwdStp(data,i):
         end = end - 1
         i-=1
     return new
+#The function for cocktail in pass mode moving backwards first
 def CTailBkwdPass(data,i):
     new=[]
     swapped = True
@@ -123,6 +137,7 @@ def CTailBkwdPass(data,i):
         i-=1
     return new
 
+#The 
 @PatternMethod
 def RecursiveIndex(self,append=1, Length=None,stall=2,start=0, debug=0):
     if self.data==[]:
