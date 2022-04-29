@@ -1,4 +1,3 @@
-from FoxDot import *
 from Functions import Markov
 
 #mock Pattern class
@@ -74,3 +73,66 @@ p.Markov(Seed=94714)
 q.Markov(Seed=94714)
 assert(p.data==q.data)
 print("Test6 Passed\n")
+
+print("Test7 Starting")
+A=[1,3,4,5,7,3,8]
+
+p=TestStr(A)
+q=TestStr(A)
+
+p.Markov(Seed=1)
+q.Markov(Seed=1)
+assert(p.data==q.data)
+print("Test7 Passed\n")
+
+print("Test8 Starting")
+A=[1,3,4,5,7,3,8]
+
+p=TestStr(A)
+q=TestStr(A)
+
+p.Markov(Seed=3.5)
+q.Markov(Seed=3.5)
+assert(p.data==q.data)
+print("Test8 Passed\n")
+
+print("Test9 Starting")
+A = [1,1,1,4,4,4,5,6,7,10,7,4]
+
+p = TestStr(A)
+
+p.Markov(i=16,GiveSeed=0)
+print("Test9 Passed\n")
+
+print("Test10 Starting")
+A = [1,1,1,4,4,4,5,6,7,10,7,4]
+
+p = TestStr(A)
+
+p.Markov(i=1,GiveSeed=0)
+print("Test10 Passed\n")
+
+print("Test11 Starting")
+A=[1,1,1,4,4,4,5,6,7,10,7,4]
+
+p=TestStr(A)
+
+p.Markov(i=0,GiveSeed=0)
+print("Test11 Passed\n")
+
+print("Test12 Starting")
+A=[1,1,1,4,4,4,5,6,7,10,7,4]
+
+p=TestStr(A)
+
+p.Markov(i=-1,GiveSeed=0)
+print("Test12 Passed\n")
+
+print("Large test, may take time")
+print("Test13 Starting")
+A = [1,1,1,4,4,4,5,6,7,10,7,4]
+
+p = TestStr(A)
+
+p.Markov(i=10000000,GiveSeed=0)
+print("Test13 Passed\n")
